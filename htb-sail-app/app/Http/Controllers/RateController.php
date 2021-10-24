@@ -18,11 +18,22 @@ class RateController extends Controller
         $consumedkWh = $this->calculateConsumedkWh($cdr['meterStart'], $cdr['meterStop']);
         //with calculated kWh calculate energy price
         $energyPrice = $this->calculateEnergyPrice($consumedkWh, $rate['energy']);
-        
-        //build return json wit calculated values
+
+        //calculate used time
+        $timestamp = $this->calculateTimestamp($cdr['timestampStart'], $cdr['timestampStop']);
+        //calculate time price with time used
+        $timePrice = $this->calculateTimePrice($timestamp, $rate['time']);
+
+        //calculate overall price with all variables
+        $overall = $this->calculateOverall($energyPrice, $timePrice, $rate['transaction']);
+
+        //build return json with calculated values
         return response()->json([
-            'overall' => $cdr,
-            'components:' => ['energy:' => $energyPrice,]
+            'overall' => $overall,
+            'components:' => [
+                'energy:' => $energyPrice,
+                'time:' => $timePrice,
+                'transaction:' => $rate['transaction']]
         ]);
     }
 
@@ -34,5 +45,20 @@ class RateController extends Controller
     //energy calculated and rounded up to 3 decimals
     private function calculateEnergyPrice($consumedkWh, $energy) {
         return round($consumedkWh/1000 * $energy, 3);
+    }
+
+    //time calculated in hours
+    private function calculateTimestamp($timestampStart, $timestampStop) {
+        return (strtotime($timestampStop) - strtotime($timestampStart)) / 60 / 60;
+    }
+
+    //time price calculated and rounded up to 3 decimals
+    private function calculateTimePrice($timestamp, $time) {
+        return round($timestamp * $time, 3);
+    }
+
+    //calculate overall price
+    private function calculateOverall($energyPrice, $timePrice, $transactionFee) {
+        return round($energyPrice + $timePrice + $transactionFee, 2);
     }
 }
