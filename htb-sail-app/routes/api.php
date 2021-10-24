@@ -19,5 +19,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
-Route::get('/rate', 'RateController@FormCheck');
 Route::post('/rate', 'RateController@ProcessRate');
