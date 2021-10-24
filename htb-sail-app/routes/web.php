@@ -16,3 +16,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+//possibility for a webview
+Route::get('/rate', function () {
+    return view('welcome');
+});
