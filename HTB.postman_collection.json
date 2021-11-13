@@ -1,0 +1,37 @@
+{
+	"info": {
+		"_postman_id": "be7cd08f-beae-4b31-9a06-5e7b23d0431a",
+		"name": "HTB",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost/api/rate",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"rate\": {\n        \"energy\": 0.3,\n        \"time\": 2,\n        \"transaction\": 1\n    },\n    \"cdr\": {\n        \"meterStart\": 1204307,\n        \"timestampStart\": \"2021-04-05T10:04:00Z\",\n        \"meterStop\": 1215230,\n        \"timestampStop\": \"2021-04-05T11:27:00Z\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/api/rate",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"rate"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -57,7 +57,7 @@ class RateController extends Controller
         return round($timestamp * $time, 3);
     }
 
-    //calculate overall price
+    //calculate overall price and rounded up to 2 decimals
     private function calculateOverall($energyPrice, $timePrice, $transactionFee) {
         return round($energyPrice + $timePrice + $transactionFee, 2);
     }
