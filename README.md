@@ -14,7 +14,7 @@
 
 -   Install Sail dependencies containing PHP and Composer:
 
-```console
+```bash
 docker run --rm \
     -u "$(id -u):$(id -g)" \
     -v $(pwd):/opt \
@@ -25,7 +25,7 @@ docker run --rm \
 
 -   Start Sail:
 
-```console
+```bash
 ./vendor/bin/sail up
 ```
 
@@ -37,7 +37,7 @@ OR
 
 ### With curl:
 
-```console
+```bash
 curl -d @request.json -H "Content-Type: application/json"
 http://localhost/api/rate
 ```
